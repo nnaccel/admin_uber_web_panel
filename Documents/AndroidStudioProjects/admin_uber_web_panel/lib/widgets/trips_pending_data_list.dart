@@ -7,7 +7,7 @@ class TripsPendingDataList extends StatefulWidget {
   const TripsPendingDataList({super.key});
 
   @override
-  State<TripsPendingDataList> createState() => _TripsPendingDataListState();
+  State<TripsPendingDataList> createState() =>  _TripsPendingDataListState();
 }
 
 class _TripsPendingDataListState extends State<TripsPendingDataList> {

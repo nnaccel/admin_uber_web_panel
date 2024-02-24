@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_admin_scaffold/admin_scaffold.dart';
 
 import '../pages/trips_page.dart';
-import '../pages/users_page.dart';
+import '../pages/customers_page.dart';
 import '../pages/trip_requests_page.dart';
+import '../pages/cs_tickets_page.dart';
 import 'dashboard.dart';
 
 class SideNavigationDrawer extends StatefulWidget {
@@ -25,9 +26,9 @@ class _SideNavigationDrawerState extends State<SideNavigationDrawer> {
           chosenScreen = DriversPage();
         });
         break;
-      case UsersPage.id:
+      case CustomersPage.id:
         setState(() {
-          chosenScreen = UsersPage();
+          chosenScreen = CustomersPage();
         });
         break;
       case TripsPage.id:
@@ -40,6 +41,11 @@ class _SideNavigationDrawerState extends State<SideNavigationDrawer> {
           chosenScreen = TripRequestsPage();
         });
         break;
+      // case CSTicketsPage.id:
+      //   setState(() {
+      //     chosenScreen = CSTicketsPage();
+      //   });
+      //   break;
     }
   }
   @override
@@ -49,14 +55,12 @@ class _SideNavigationDrawerState extends State<SideNavigationDrawer> {
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: const Color(0xff030126),
-        title: const Text(
-          "Admin/Dispatcher/CSR Web Panel",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-
+        title: Image.asset(
+          "images/logo2.png",
+          width: 200,
+          height: 50,
         ),
+
       ),
       sideBar: SideBar(
         items: const [
@@ -67,7 +71,7 @@ class _SideNavigationDrawerState extends State<SideNavigationDrawer> {
           ),
           AdminMenuItem(
             title: "Customers",
-            route: UsersPage.id,
+            route: CustomersPage.id,
             icon: CupertinoIcons.person_2_fill,
           ),
           AdminMenuItem(
@@ -80,11 +84,11 @@ class _SideNavigationDrawerState extends State<SideNavigationDrawer> {
             route: TripsPage.id,
             icon: CupertinoIcons.checkmark_circle_fill,
           ),
-          AdminMenuItem(
-            title: "CS Tickets",
-            route: TripsPage.id,
-            icon: CupertinoIcons.tickets_fill,
-          ),
+          // AdminMenuItem(
+          //   title: "CS Tickets",
+          //   route: CSTicketsPage.id,
+          //   icon: CupertinoIcons.tickets_fill,
+          // ),
         ],
         selectedRoute: DriversPage.id,
         onSelected: (selectedPage){
@@ -97,17 +101,26 @@ class _SideNavigationDrawerState extends State<SideNavigationDrawer> {
           child: const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                Icons.accessibility,
-                color: Colors.white,
+              Text(
+                "Admin/Dispatcher Web Panel",
+                style: TextStyle(
+                    //fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white
+                ),
               ),
-              SizedBox(
-                width: 10,
-              ),
-              Icon(
-                Icons.settings,
-                color: Colors.white,
-              ),
+
+              // Icon(
+              //   Icons.accessibility,
+              //   color: Colors.white,
+              // ),
+              // SizedBox(
+              //   width: 10,
+              // ),
+              // Icon(
+              //   Icons.settings,
+              //   color: Colors.white,
+              // ),
             ],
           ),
         ),
@@ -118,16 +131,23 @@ class _SideNavigationDrawerState extends State<SideNavigationDrawer> {
           child: const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                Icons.admin_panel_settings_outlined,
-                color: Colors.white,
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              Icon(
-                Icons.computer,
-                color: Colors.white,
+              // Icon(
+              //   Icons.admin_panel_settings_outlined,
+              //   color: Colors.white,
+              // ),
+              // SizedBox(
+              //   width: 10,
+              // ),
+              // Icon(
+              //   Icons.computer,
+              //   color: Colors.white,
+              // ),
+              Text(
+                "Developed by: Agoo, Lanuza, Lee, Rivera",
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.white
+                ),
               ),
             ],
           ),

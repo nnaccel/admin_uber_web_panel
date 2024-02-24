@@ -2,14 +2,14 @@ import 'package:admin_uber_web_panel/methods/common_methods.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
-class UsersDataList extends StatefulWidget {
-  const UsersDataList({super.key});
+class CutsomersDataList extends StatefulWidget {
+  const CutsomersDataList({super.key});
 
   @override
-  State<UsersDataList> createState() => _UsersDataListState();
+  State<CutsomersDataList> createState() => _CutsomersDataListState();
 }
 
-class _UsersDataListState extends State<UsersDataList> {
+class _CutsomersDataListState extends State<CutsomersDataList> {
   final usersRecordsFromDatabase = FirebaseDatabase.instance.ref().child("users");
   CommonMethods cMethods = CommonMethods();
 

@@ -7,11 +7,13 @@ class DriversDataList extends StatefulWidget {
 
   @override
   State<DriversDataList> createState() => _DriversDataListState();
+
 }
 
 class _DriversDataListState extends State<DriversDataList> {
   final driversRecordsFromDatabase = FirebaseDatabase.instance.ref().child("drivers");
   CommonMethods cMethods = CommonMethods();
+
 
   @override
   Widget build(BuildContext context) {

@@ -1,20 +1,21 @@
 import 'package:admin_uber_web_panel/methods/common_methods.dart';
-import 'package:admin_uber_web_panel/widgets/drivers_data_list.dart';
+import 'package:admin_uber_web_panel/widgets/customers_data_list.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
-class DriversPage extends StatefulWidget {
-  static const String id = "\webPageDrivers";
-  const DriversPage({super.key});
+class CustomersPage extends StatefulWidget {
+  static const String id = "\webPageUsers";
+  const CustomersPage({super.key});
 
   @override
-  State<DriversPage> createState() => _DriversPageState();
+  State<CustomersPage> createState() => _CustomersPageState();
 }
 
-class _DriversPageState extends State<DriversPage> {
+class _CustomersPageState extends State<CustomersPage> {
+
   String name = "";
   List<Map> itemsList = [];
-  final driversRecordsFromDatabase = FirebaseDatabase.instance.ref().child("drivers");
+  final usersRecordsFromDatabase = FirebaseDatabase.instance.ref().child("users");
   CommonMethods cMethods = CommonMethods();
 
   @override
@@ -29,7 +30,7 @@ class _DriversPageState extends State<DriversPage> {
               Container(
                 alignment: Alignment.topLeft,
                 child: const Text(
-                  "Manage Driver Accounts",
+                  "Manage Customer Accounts",
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
@@ -50,26 +51,23 @@ class _DriversPageState extends State<DriversPage> {
                   },
                 ),
               ),
-
               const SizedBox(
                 height: 18,
               ),
               Row(
                 children: [
-                  cMethods.header(2, "DRIVER ID"),
-                  cMethods.header(1, "PICTURE"),
+                  cMethods.header(2, "USER ID"),
                   cMethods.header(1, "NAME"),
-                  cMethods.header(1, "CAR DETAILS"),
+                  cMethods.header(1, "EMAIL"),
                   cMethods.header(1, "PHONE"),
-                  cMethods.header(1, "TOTAL EARNINGS"),
                   cMethods.header(1, "ACTION"),
                 ],
               ),
 
               //display data
-              //DriversDataList(),
+              //CustomersDataList();
               StreamBuilder(
-                stream: driversRecordsFromDatabase.onValue,
+                stream: usersRecordsFromDatabase.onValue,
                 builder: (BuildContext context, snapshotData){
                   if(snapshotData.hasError){
                     return const Center(
@@ -113,33 +111,19 @@ class _DriversPageState extends State<DriversPage> {
 
                           cMethods.data(
                             1,
-                            Image.network(
-                              itemsList[index]["photo"].toString(),
-                              width: 50,
-                              height: 50,
-                            ),
-                          ),
-                          cMethods.data(
-                            1,
                             Text(itemsList[index]["name"].toString()),
                           ),
+
                           cMethods.data(
                             1,
-                            Text(
-                                itemsList[index]["car_details"]["carModel"].toString() + " - " +
-                                    itemsList[index]["car_details"]["carPlateNumber"].toString()
-                            ),
+                            Text(itemsList[index]["email"].toString()),
                           ),
+
                           cMethods.data(
                             1,
                             Text(itemsList[index]["phone"].toString()),
                           ),
-                          cMethods.data(
-                            1,
-                            itemsList[index]["earnings"] != null ?
-                            Text("\$" + itemsList[index]["earnings"].toString())
-                                : const Text("\₱0"),
-                          ),
+
                           cMethods.data(
                             1,
                             itemsList[index]["blockStatus"] == "no" ?
@@ -149,7 +133,7 @@ class _DriversPageState extends State<DriversPage> {
                               ),
                               onPressed: () async{
                                 await FirebaseDatabase.instance.ref()
-                                    .child("drivers").child(itemsList[index]["id"])
+                                    .child("users").child(itemsList[index]["id"])
                                     .update({
                                   "blockStatus": "yes",
                                 });
@@ -159,6 +143,7 @@ class _DriversPageState extends State<DriversPage> {
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
+
                                 ),
                               ),
                             )
@@ -168,7 +153,7 @@ class _DriversPageState extends State<DriversPage> {
                               ),
                               onPressed: () async{
                                 await FirebaseDatabase.instance.ref()
-                                    .child("drivers").child(itemsList[index]["id"])
+                                    .child("users").child(itemsList[index]["id"])
                                     .update({
                                   "blockStatus": "no",
                                 });
@@ -176,7 +161,6 @@ class _DriversPageState extends State<DriversPage> {
                               child: const Text(
                                 "Approve",
                                 style: TextStyle(
-                                  backgroundColor: Colors.green,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
 
@@ -197,9 +181,11 @@ class _DriversPageState extends State<DriversPage> {
     );
   }
 
-  void SearchMethod(String text) {
+  void SearchMethod(String text){
     setState(() {
       name = text;
     });
   }
 }
+
+
